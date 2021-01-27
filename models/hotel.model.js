@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const TodoSchema = mongoose.Schema(
+const BookingSchema = mongoose.Schema(
   {
     customerName: String,
     roomNo: Number,
@@ -14,4 +14,4 @@ const TodoSchema = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Todo", TodoSchema);
+module.exports = mongoose.model("Booking", BookingSchema);

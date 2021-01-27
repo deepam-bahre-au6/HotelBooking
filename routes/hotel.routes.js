@@ -1,18 +1,18 @@
 module.exports = (app) => {
   const Hotel = require("../controllers/hotel.controller.js");
 
-  // Create a new todo
+  // Create a new booking
   app.post("/booking", Hotel.create);
 
-  // Retrieve all todos
+  // Retrieve all booking
   app.get("/booking", Hotel.findAll);
 
-  // Retrieve a single todo by id
+  // Retrieve a single booking by id
   app.get("/booking/:id", Hotel.findOne);
 
-  // Update a Todo with id
+  // Update a booking with id
   app.put("/booking/:id", Hotel.update);
 
-  // Delete a Todo by id
+  // Delete a booking by id
   app.delete("/booking/:id", Hotel.delete);
 };
