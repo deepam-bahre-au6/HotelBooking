@@ -9,19 +9,18 @@ exports.create = (req, res) => {
     });
   }
 
-  Booking.find(
-    {
-      roomNo: req.body.roomNo,
-      hotelName: req.body.hotelName,
-      Date: req.body.Date,
-    },
-    function (err, result) {
-      if (result) {
-        return res.status(302).json({
+  Booking.find({
+    roomNo: req.body.roomNo,
+    hotelName: req.body.hotelName,
+    Date: req.body.Date,
+  })
+    .then((bookings) => {
+      if (bookings) {
+        res.status(302).json({
           message: "This room already booked",
         });
       } else {
-        // Create a Booking
+        //Create a Booking
         const booking = new Booking({
           customerName: req.body.customerName || "Untitled booking",
           roomNo: req.body.roomNo,
@@ -29,7 +28,7 @@ exports.create = (req, res) => {
           Date: req.body.Date,
         });
 
-        // Save Booking in the database
+        //     // Save Booking in the database
         booking
           .save()
           .then((data) => {
@@ -43,8 +42,12 @@ exports.create = (req, res) => {
             });
           });
       }
-    }
-  );
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving booking.",
+      });
+    });
 };
 
 // Retrieve and return all bookings from the database.
